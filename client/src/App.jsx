@@ -6,6 +6,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
+// 🔥 URL DEL BACKEND EN RENDER
+const API_URL = "https://proyecto-reactivo-api.onrender.com";
+
 function App() {
 
   // ===============================
@@ -35,7 +38,7 @@ function App() {
     setError(null)
 
     try {
-      const respuesta = await fetch('http://localhost:3001/api/sensores')
+      const respuesta = await fetch(`${API_URL}/api/sensores`)
 
       if (!respuesta.ok) {
         throw new Error(`Error HTTP: ${respuesta.status}`)
@@ -46,7 +49,7 @@ function App() {
 
     } catch (err) {
       console.error("❌ Error al cargar sensores:", err)
-      setError("No se pudo conectar con el servidor. ¿Está corriendo el backend?")
+      setError("No se pudo conectar con el servidor.")
     } finally {
       setCargando(false)
     }
@@ -74,7 +77,7 @@ function App() {
     }
 
     try {
-      const respuesta = await fetch('http://localhost:3001/api/sensores', {
+      const respuesta = await fetch(`${API_URL}/api/sensores`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -106,7 +109,7 @@ function App() {
     }
 
     try {
-      const respuesta = await fetch(`http://localhost:3001/api/sensores/${id}`, {
+      const respuesta = await fetch(`${API_URL}/api/sensores/${id}`, {
         method: 'DELETE'
       })
 
